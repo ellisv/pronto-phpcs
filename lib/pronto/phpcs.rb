@@ -3,8 +3,15 @@ require 'shellwords'
 
 module Pronto
   class Phpcs < Runner
+    def initialize(_, _ = nil)
+      super
+
+      @executable = ENV['PRONTO_PHPCS_EXECUTABLE'] || 'phpcs'
+      @standard = ENV['PRONTO_PHPCS_STANDARD'] || 'PSR2'
+    end
+
     def run
-      return [] if !@patches
+      return [] unless @patches
 
       @patches.select { |patch| valid_patch?(patch) }
         .map { |patch| inspect(patch) }
@@ -25,7 +32,9 @@ module Pronto
 
     def run_phpcs(path)
       escaped_path = Shellwords.escape(path)
-      JSON.parse(`phpcs #{escaped_path} --report=json`)
+      escaped_standard = Shellwords.escape(@standard)
+
+      JSON.parse(`#{@executable} #{escaped_path} --report=json --standard=#{escaped_standard}`)
         .fetch('files', {})
         .fetch(path, {})
         .fetch('messages', [])
