@@ -4,7 +4,7 @@ require 'json'
 
 module Pronto
   class Phpcs < Runner
-    def initialize(_, _ = nil)
+    def initialize(patches, commit = nil)
       super
 
       @executable = ENV['PRONTO_PHPCS_EXECUTABLE'] || 'phpcs'
