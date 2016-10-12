@@ -31,10 +31,11 @@ module Pronto
     end
 
     def run_phpcs(path)
-      escaped_path = Shellwords.escape(path)
+      escaped_executable = Shellwords.escape(@executable)
       escaped_standard = Shellwords.escape(@standard)
+      escaped_path = Shellwords.escape(path)
 
-      JSON.parse(`#{@executable} #{escaped_path} --report=json --standard=#{escaped_standard}`)
+      JSON.parse(`#{escaped_executable} --report=json --standard=#{escaped_standard} #{escaped_path}`)
         .fetch('files', {})
         .fetch(path, {})
         .fetch('messages', [])
