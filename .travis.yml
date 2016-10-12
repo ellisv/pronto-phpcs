@@ -1,5 +1,12 @@
-sudo: false
-language: ruby
-rvm:
-  - 2.2.3
-before_install: gem install bundler -v 1.13.3
+language: php
+php:
+  - 7.0
+env:
+  - PRONTO_PHPCS_EXECUTABLE="$HOME/.composer/vendor/bin/phpcs"
+before_install:
+  - rvm install 2.2.3
+  - gem install bundler -v 1.13.3
+install:
+  - composer global require squizlabs/php_codesniffer
+  - bundle install
+script: bundle exec rake
