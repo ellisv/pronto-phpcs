@@ -13,9 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/EllisV/pronto-phpcs'
   spec.license = 'MIT'
 
-  spec.files = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  spec.files = Dir.glob('lib/**/*.rb') + ['pronto-phpcs.gemspec', 'LICENSE', 'README.md']
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency('pronto', '~> 0.7.0')
