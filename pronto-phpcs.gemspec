@@ -16,8 +16,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir.glob('lib/**/*.rb') + ['pronto-phpcs.gemspec', 'LICENSE', 'README.md']
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency('pronto', '~> 0.8.0')
+  spec.add_runtime_dependency('pronto', ['~> 0.8.0', '< 0.10.x'])
   spec.add_development_dependency 'bundler', '~> 1.13'
-  spec.add_development_dependency 'rake', '~> 11.0'
-  spec.add_development_dependency 'rspec', '~> 3.4'
+  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'rspec', '~> 3.5'
 end
