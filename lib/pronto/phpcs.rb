@@ -36,7 +36,7 @@ module Pronto
       escaped_standard = Shellwords.escape(@standard)
       escaped_path = Shellwords.escape(path)
 
-      JSON.parse(`#{escaped_executable} --report=json --standard=#{escaped_standard} #{escaped_path}`)
+      JSON.parse(`#{escaped_executable} -q --report=json --standard=#{escaped_standard} #{escaped_path}`)
         .fetch('files', {})
         .fetch(path, {})
         .fetch('messages', [])
